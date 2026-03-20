@@ -1,0 +1,6 @@
+<svg width="520" height="96" viewBox="0 0 520 96" xmlns="http://www.w3.org/2000/svg">
+  <rect width="96" height="96" rx="24" fill="#43aa8b"/>
+  <text x="48" y="70" font-family="Inter, sans-serif" font-size="56" font-weight="800" text-anchor="middle" fill="#ffffff">C</text>
+  <path d="M56 60 L64 70 L80 48" fill="none" stroke="#161a1d" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="118" y="66" font-family="Inter, sans-serif" font-size="40" font-weight="600" fill="#ffffff">cronoconcurso</text>
+</svg>

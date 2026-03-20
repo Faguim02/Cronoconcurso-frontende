@@ -1,0 +1,155 @@
+.verify-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(210, 40%, 96.1%);
+    padding: 1rem;
+  }
+  
+  .verify-card {
+    background: hsl(0, 0%, 100%);
+    border-radius: 1rem;
+    padding: 2.5rem 2rem;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 4px 24px hsla(222, 84%, 4.9%, 0.08);
+    text-align: center;
+  }
+  
+  .verify-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: hsl(210, 40%, 96.1%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-size: 1.5rem;
+  }
+  
+  .verify-card h1 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: hsl(222.2, 84%, 4.9%);
+    margin: 0 0 0.5rem;
+  }
+  
+  .verify-card .verify-subtitle {
+    font-size: 0.875rem;
+    color: hsl(215.4, 16.3%, 46.9%);
+    margin: 0 0 2rem;
+    line-height: 1.5;
+  }
+  
+  .verify-card .verify-email-highlight {
+    font-weight: 600;
+    color: hsl(222.2, 84%, 4.9%);
+  }
+  
+  .code-inputs {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .code-inputs input {
+    width: 48px;
+    height: 56px;
+    border: 2px solid hsl(214.3, 31.8%, 91.4%);
+    border-radius: 0.75rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: hsl(222.2, 84%, 4.9%);
+    background: hsl(0, 0%, 100%);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    caret-color: hsl(222.2, 47.4%, 11.2%);
+  }
+  
+  .code-inputs input:focus {
+    border-color: hsl(222.2, 47.4%, 11.2%);
+    box-shadow: 0 0 0 3px hsla(222.2, 47.4%, 11.2%, 0.1);
+  }
+  
+  .code-inputs input.filled {
+    border-color: hsl(222.2, 47.4%, 11.2%);
+    background: hsl(210, 40%, 96.1%);
+  }
+  
+  .code-inputs input.error {
+    border-color: hsl(0, 84.2%, 60.2%);
+    box-shadow: 0 0 0 3px hsla(0, 84.2%, 60.2%, 0.1);
+  }
+  
+  .verify-btn {
+    width: 100%;
+    padding: 0.875rem;
+    border: none;
+    border-radius: 0.75rem;
+    background: hsl(222.2, 47.4%, 11.2%);
+    color: hsl(210, 40%, 98%);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-bottom: 1rem;
+  }
+  
+  .verify-btn:hover {
+    opacity: 0.9;
+  }
+  
+  .verify-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .verify-resend {
+    font-size: 0.8125rem;
+    color: hsl(215.4, 16.3%, 46.9%);
+  }
+  
+  .verify-resend button {
+    background: none;
+    border: none;
+    color: hsl(222.2, 47.4%, 11.2%);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.8125rem;
+  }
+  
+  .verify-resend button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+  
+  .verify-error {
+    color: hsl(0, 84.2%, 60.2%);
+    font-size: 0.8125rem;
+    margin: -0.75rem 0 1rem;
+  }
+  
+  .verify-success {
+    color: hsl(142, 71%, 45%);
+    font-size: 0.8125rem;
+    margin: -0.75rem 0 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    .verify-card {
+      padding: 2rem 1.25rem;
+    }
+  
+    .code-inputs input {
+      width: 42px;
+      height: 48px;
+      font-size: 1.25rem;
+    }
+  }
+  

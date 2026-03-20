@@ -1,0 +1,130 @@
+.payment-cancelled-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0d1117 0%, #161a1d 50%, #1a1a2e 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e6e6e6;
+  }
+  
+  .payment-cancelled-content {
+    text-align: center;
+    max-width: 500px;
+    padding: 2rem;
+  }
+  
+  .payment-cancelled-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 3rem;
+    animation: shake 0.5s ease-out;
+    box-shadow: 0 10px 40px rgba(231, 76, 60, 0.3);
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+  }
+  
+  .payment-cancelled-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e74c3c;
+    margin: 0 0 0.5rem;
+  }
+  
+  .payment-cancelled-desc {
+    font-size: 1rem;
+    color: #8b949e;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .payment-cancelled-reasons {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+  
+  .payment-cancelled-reasons h3 {
+    font-size: 0.95rem;
+    color: #c9d1d9;
+    margin: 0 0 1rem;
+  }
+  
+  .payment-cancelled-reasons ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .payment-cancelled-reasons li {
+    padding: 0.5rem 0;
+    color: #8b949e;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .payment-cancelled-reasons li::before {
+    content: "•";
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  .payment-cancelled-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .payment-cancelled-btn-primary {
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #43aa8b, #1961ae);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .payment-cancelled-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(67, 170, 139, 0.3);
+  }
+  
+  .payment-cancelled-btn-secondary {
+    padding: 0.75rem 2rem;
+    background: transparent;
+    color: #8b949e;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  
+  .payment-cancelled-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e6e6e6;
+  }
+  

@@ -1,0 +1,43 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Landing from './pages/Landing'
+import Cronogramas from './pages/Cronogramas'
+import PrivateRoute from './components/PrivateRoute'
+import SelectConcurso from './pages/SelectConcurso'
+import Cronograma from './pages/Cronograma'
+import Plans from './pages/Plans'
+import Profile from './pages/admin/Profile'
+import PagamentoSucesso from './pages/SucessPaymento'
+import PagamentoCancelado from './pages/CancelPayment'
+import NotFound from './pages/NotFound'
+import Questoes from './pages/Questoes'
+
+function App() {
+
+  
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/selecionar-concurso" element={<SelectConcurso />} />
+        <Route  path='/cronograma/:id' element={<Cronograma/>}/>
+        <Route path='/usuario/planos' element={<Plans/>}/>
+        <Route path='/usuario' element={<Profile/>}/>
+        <Route path='questoes' element={<Questoes/>}/>
+        <Route path='/payment/sucess' element={<PagamentoSucesso/>}/>
+        <Route path='/payment/cancel' element={<PagamentoCancelado/>}/>
+        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/cronogramas"
+          element={
+            <PrivateRoute>
+              <Cronogramas />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
