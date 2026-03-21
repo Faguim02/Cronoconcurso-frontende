@@ -36,7 +36,7 @@ const Landing = () => {
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
 
-  const [showVerify, setShowVerify] = useState(false);
+  const [showVerify, setShowVerify] = useState(true);
   const [verifyCode, setVerifyCode] = useState(Array(CODE_LENGTH).fill(""));
   const [verifyError, setVerifyError] = useState("");
   const [verifySuccess, setVerifySuccess] = useState("");
@@ -88,13 +88,18 @@ const Landing = () => {
     }
     setVerifyLoading(true);
     setVerifyError("");
-    await userService.verifyEmail(fullCode)
+    const res = await userService.verifyEmail(fullCode)
+    if (res.status != 200) {
+      console.log("erro")
+      setVerifyError("Erro ao verificar e-mail");
+      return
+    }
     
     setVerifyLoading(false);
     setVerifySuccess("E-mail verificado com sucesso!");
 
-    setShowVerify(false);
-    setShowLogin(true);
+    //setShowVerify(false);
+    //setShowLogin(true);
   };
   const handleVerifyResend = () => {
     setVerifyCooldown(60);
@@ -147,8 +152,10 @@ const Landing = () => {
       setEmail('')
       setPassword('')
       setName('')
-      if(res.status === 201) {
+      if(res.data.message == "Usuário criado com sucesso" || res.data.message == "Código já enviado, verifique seu email" || res.data.message == 'Código expirado, um novo foi enviado para seu email') {
         openVerifyModal()
+      } else if(res.data.message == "Usuário ja cadastrado") {
+        setShowLogin(true)
       }
     }
   }
