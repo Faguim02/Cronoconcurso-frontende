@@ -67,8 +67,8 @@ const Plans = () => {
 
     const data = {
       planId: planId,
-      successUrl: "http://localhost:5173/payment/sucess",
-      cancelUrl: "http://localhost:5173/payment/cancel"
+      successUrl: "https://cronoconcurso.com.br/payment/sucess",
+      cancelUrl: "https://cronoconcurso.com.br/payment/cancel"
     }
 
     const checkout = await paymentService.checkout(data)
