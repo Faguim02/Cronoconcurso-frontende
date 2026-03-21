@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3333/api';
+const API_BASE_URL = 'https://api.cronoconcurso.com.br';
 
 export const useJwtToken = () => {
   const jwtToken = localStorage.getItem('jwtToken');
