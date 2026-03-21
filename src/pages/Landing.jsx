@@ -36,7 +36,7 @@ const Landing = () => {
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
 
-  const [showVerify, setShowVerify] = useState(true);
+  const [showVerify, setShowVerify] = useState(false);
   const [verifyCode, setVerifyCode] = useState(Array(CODE_LENGTH).fill(""));
   const [verifyError, setVerifyError] = useState("");
   const [verifySuccess, setVerifySuccess] = useState("");
