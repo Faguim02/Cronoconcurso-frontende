@@ -98,8 +98,8 @@ const Landing = () => {
     setVerifyLoading(false);
     setVerifySuccess("E-mail verificado com sucesso!");
 
-    //setShowVerify(false);
-    //setShowLogin(true);
+    setShowVerify(false);
+    setShowLogin(true);
   };
   const handleVerifyResend = () => {
     setVerifyCooldown(60);
@@ -155,6 +155,7 @@ const Landing = () => {
       if(res.data.message == "Usuário criado com sucesso" || res.data.message == "Código já enviado, verifique seu email" || res.data.message == 'Código expirado, um novo foi enviado para seu email') {
         openVerifyModal()
       } else if(res.data.message == "Usuário ja cadastrado") {
+        setShowSignup(false)
         setShowLogin(true)
       }
     }
