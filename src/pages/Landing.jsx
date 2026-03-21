@@ -15,37 +15,6 @@ const FEATURES = [
   // { emoji: "🔔", title: "Lembretes inteligentes", desc: "Notificações que te mantêm no ritmo certo, sem deixar nenhuma matéria para trás." },
 ];
 
-const PLANS = [
-  {
-    name: "Grátis",
-    price: "R$ 0",
-    period: "/mês",
-    desc: "Para quem quer começar",
-    features: ["1 cronograma ativo", "Geração por IA básica", "Acompanhamento simples"],
-    cta: "Começar grátis",
-    highlight: false,
-  },
-  {
-    name: "Pro",
-    price: "R$ 29",
-    period: "/mês",
-    desc: "Para quem leva a sério",
-    features: ["Cronogramas ilimitados", "IA avançada com edital", "Dashboard completo", "Questões comentadas", "Suporte prioritário"],
-    cta: "Assinar Pro",
-    highlight: true,
-    badge: "Mais popular",
-  },
-  {
-    name: "Vitalício",
-    price: "R$ 197",
-    period: " único",
-    desc: "Pague uma vez, use para sempre",
-    features: ["Tudo do Pro", "Acesso vitalício", "Atualizações futuras", "Comunidade exclusiva", "Mentorias em grupo"],
-    cta: "Garantir acesso",
-    highlight: false,
-  },
-];
-
 const CODE_LENGTH = 6;
 
 const paymentService = new PaymentService();
@@ -220,7 +189,7 @@ const Landing = () => {
       <section className="landing-hero">
         <div className="hero-glow" />
         <div className="hero-content">
-          <div className="hero-badge">🚀 +2.000 concurseiros já usam</div>
+          <div className="hero-badge">🚀 Decolar</div>
           <h1 className="hero-title">
             Sua aprovação começa com um
             <span className="hero-highlight"> cronograma inteligente</span>
@@ -248,7 +217,7 @@ const Landing = () => {
               Ver como funciona
             </button>
           </div>
-          <div className="hero-stats">
+          {/* <div className="hero-stats">
             <div className="hero-stat">
               <span className="hero-stat-value">2.847</span>
               <span className="hero-stat-label">Usuários ativos</span>
@@ -263,7 +232,7 @@ const Landing = () => {
               <span className="hero-stat-value">94%</span>
               <span className="hero-stat-label">Satisfação</span>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="hero-mockup">
           <div className="mockup-window">
@@ -343,7 +312,7 @@ const Landing = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="landing-testimonials" id="testimonials">
+      {/* <section className="landing-testimonials" id="testimonials">
         <h2 className="section-heading">Quem usa, <span className="hero-highlight">aprova</span></h2>
         <div className="testimonials-grid">
           {TESTIMONIALS.map((t, i) => (
@@ -359,7 +328,7 @@ const Landing = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Final */}
       <section className="landing-final-cta">
