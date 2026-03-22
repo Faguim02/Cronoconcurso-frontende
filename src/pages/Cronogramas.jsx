@@ -264,7 +264,7 @@ const Cronogramas = () => {
       </div>
 
       {/* Modal */}
-      {modalOpen && usuario.plan && (
+      {modalOpen && !usuario.plan && (
         <div className="modal-overlay" onClick={() => { setModalOpen(false); setShowEmojiPicker(false); }}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
@@ -280,7 +280,7 @@ const Cronogramas = () => {
           </div>
         </div>
       )}
-      {modalOpen && !usuario.plan && (
+      {modalOpen && usuario.plan && (
         <div className="modal-overlay" onClick={() => { setModalOpen(false); setShowEmojiPicker(false); }}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
