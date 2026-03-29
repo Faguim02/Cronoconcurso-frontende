@@ -75,15 +75,20 @@ const Plans = () => {
     if (checkout.status == "link") {
       navigatePage(checkout.link)
     } else if(checkout.status == "updated" || checkout.status == "scheduled") {
-      setMessagePlan(checkout.message)
+
+      setMessagePlan("Aguarde!")
+
       refetch()
       const user = await userService.AboutUser();
       localStorage.setItem('user', JSON.stringify(user));
       setUsuario(user);
 
+      setMessagePlan(checkout.message)
+
       setTimeout(() => {
         console.log("Aguarde!");
-      }, 2000);
+      }, 1000);
+
 
       setShowModelChangePlan(false)
     }
@@ -97,8 +102,11 @@ const Plans = () => {
   }
 
   async function handleCancelPlan() {
-    const cancel = await paymentService.cancelPlan()
+    await paymentService.cancelPlan()
     refetch()
+    const user = await userService.AboutUser();
+    localStorage.setItem('user', JSON.stringify(user));
+    setUsuario(user);
     setShowModelCancelPlan(false)
   }
 
