@@ -63,6 +63,21 @@ const Questoes = () => {
       }
     };
     fetchUser();
+
+    // Restore última sessão
+  const fetchLastSession = async () => {
+    try {
+      const result = await questoesService.getLastQuestionSession();
+      if (result?.data?.questions?.length) {
+        setQuestoes(result.data.questions);
+        setStarted(true);
+      }
+    } catch {
+      // sem sessão anterior, ignora
+    }
+  };
+  fetchLastSession();
+
   }, []);
 
   // ✅ handleStart corrigido: loading, validação de retorno e erro tratado
