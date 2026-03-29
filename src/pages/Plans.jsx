@@ -4,6 +4,7 @@ import { PaymentService } from '../services/Payment/PaymentService';
 import { MdOutlineClear } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { UsuarioService } from '../services/Usuario/UsuarioService';
 
 
 const CheckIcon = () => (
@@ -22,6 +23,7 @@ const invoices = [
 ];
 
 const paymentService = new PaymentService();
+const userService = new UsuarioService();
 
 const Plans = () => {
 
