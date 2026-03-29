@@ -20,4 +20,8 @@ export class QuestoesService {
             }
         }
     }
+
+    async getLastQuestionSession() {
+        return await api.get('/questoes/sessao');
+    }
 }
