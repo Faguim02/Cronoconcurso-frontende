@@ -22,6 +22,7 @@ export class QuestoesService {
     }
 
     async getLastQuestionSession() {
+        useJwtToken()
         return await api.get('/questoes/sessao');
     }
 }
