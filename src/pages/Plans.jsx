@@ -74,32 +74,25 @@ const Plans = () => {
     }
 
     const checkout = await paymentService.checkout(data)
+
+    console.log(checkout)
+
     if (checkout.status == "link") {
       navigatePage(checkout.link)
     } else if(checkout.status == "updated" || checkout.status == "scheduled") {
+
+      console.log("opa")
 
       setMessagePlan("Aguarde!")
 
       refetch()
       const user = await userService.AboutUser();
-      localStorage.setItem('user', JSON.stringify(user));
       setUsuario(user);
 
       setMessagePlan(checkout.message)
 
-      setTimeout(() => {
-        console.log("Aguarde!");
-      }, 1000);
-
-
       setShowModelChangePlan(false)
     }
-
-    const user = await userService.AboutUser();
-    localStorage.setItem('user', JSON.stringify(user));
-    setUsuario(user);
-
-    setShowModelChangePlan(false)
 
   }
 
