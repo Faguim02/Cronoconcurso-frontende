@@ -45,15 +45,18 @@ const buildTimelineData = (topics) => {
   topics.forEach((topic) => {
     topic.history?.forEach((session) => {
       const date = new Date(session.createdAt);
-      const day = days[date.getDay()];
-      if (!map[day]) map[day] = { dia: day, acertos: 0, erros: 0 };
-      map[day].acertos += session.score ?? 0;
-      map[day].erros += (session.total ?? 0) - (session.score ?? 0);
+      // Usar a data completa como chave para não misturar dias iguais de semanas diferentes
+      const key = date.toISOString().split("T")[0]; // "2025-04-05"
+      const label = `${String(date.getDate()).padStart(2, "0")}/${String(date.getMonth() + 1).padStart(2, "0")}`; // "05/04"
+
+      if (!map[key]) map[key] = { dia: label, acertos: 0, erros: 0, _ts: date.getTime() };
+      map[key].acertos += session.score ?? 0;
+      map[key].erros += (session.total ?? 0) - (session.score ?? 0);
     });
   });
 
-  // Retorna na ordem correta da semana
-  return days.filter((d) => map[d]).map((d) => map[d]);
+  // Ordenar por timestamp crescente (mais antigo → mais recente)
+  return Object.values(map).sort((a, b) => a._ts - b._ts);
 };
 
 const Dashboard = () => {
@@ -191,28 +194,28 @@ const Dashboard = () => {
             {/* Summary Cards */}
             <div className="dash-summary-row">
               <div className="dash-summary-card dash-summary-total">
-                <span className="dash-summary-icon">📝</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
                 <div>
                   <div className="dash-summary-value">{overall.totalQuestions}</div>
                   <div className="dash-summary-label">Total de Questões</div>
                 </div>
               </div>
               <div className="dash-summary-card dash-summary-correct">
-                <span className="dash-summary-icon">✅</span>
+              <svg color="#21c45d" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-check-icon lucide-search-check"><path d="m8 11 2 2 4-4"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                 <div>
                   <div className="dash-summary-value">{overall.totalCorrect}</div>
                   <div className="dash-summary-label">Acertos</div>
                 </div>
               </div>
               <div className="dash-summary-card dash-summary-wrong">
-                <span className="dash-summary-icon">❌</span>
+              <svg color="#ed2c2c" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x-icon lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
                 <div>
                   <div className="dash-summary-value">{overall.totalIncorrect}</div>
                   <div className="dash-summary-label">Erros</div>
                 </div>
               </div>
               <div className="dash-summary-card dash-summary-rate">
-                <span className="dash-summary-icon">🎯</span>
+              <svg color="#ed2c2c" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target-icon lucide-target"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                 <div>
                   <div className="dash-summary-value">{overall.accuracy}%</div>
                   <div className="dash-summary-label">Taxa de Acerto</div>
