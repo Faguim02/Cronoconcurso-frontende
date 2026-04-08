@@ -311,7 +311,7 @@ const Landing = () => {
                     <li>{features.cronogramAmount > 0 ? <CheckIcon /> : <MdOutlineClear color="red"/>}{ features.cronogramAmount == 0 ? "Não gera cronogramas" : features.cronogramAmount == 1 ? `${features.cronogramAmount} cronograma/mês` : `${features.cronogramAmount} cronogramas/mês` } </li>
                     <li><CheckIcon/> {features.questionAmount} Questionarios por mês </li>
                   </ul>
-                  <button className="btn-outline" onClick={() => setShowSignup(true)}>Adiquirir</button>
+                  <button className="btn-outline" onClick={() => setShowSignup(true)}>Adquirir</button>
                 </div>
               )
     
