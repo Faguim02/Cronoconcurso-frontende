@@ -116,6 +116,10 @@
     margin-bottom: 5px;
     line-height: 1.4;
   }
+  .topics-list li:hover {
+    color: var(--card-primary);
+    text-decoration: underline;
+  }
   
   .no-content {
     text-align: center;

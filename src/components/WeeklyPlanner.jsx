@@ -2,9 +2,14 @@ import React, { useState, useMemo, useEffect } from 'react';
 import '../styles/weeklyPlanner.css';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
+import { useNavigate } from 'react-router-dom';
+import { QuestoesService } from '../services/QuestoesService/QuestoesService';
 
-const WeeklyPlanner = ({ planejamentos, color, dateCreated }) => {
+const questoes = new QuestoesService();
+
+const WeeklyPlanner = ({ planejamentos, color, dateCreated, banca }) => {
   const [currentWeek, setCurrentWeek] = useState(0);
+  const navigate = useNavigate();
   
   const weekDays = [
     'Domingo',
@@ -22,6 +27,19 @@ const WeeklyPlanner = ({ planejamentos, color, dateCreated }) => {
     setCurrentWeek(Math.floor((diasDesdeCriacao - 1) / 7));
     
   }, []);
+
+  const getQuestionTopic = async(topic, diciplina) => {
+    let data = {
+      number: 5,
+      banca,
+      dicipline: diciplina,
+      subject: topic,
+      dificuldade: "Média",
+      repeat: true
+    }
+    await questoes.generateQuestion(data)
+    navigate('/questoes')
+  }
 
   // Retorna o índice do dia da semana (0-6) para um dado dia sequencial
   const getDiaSemana = (diaSequencial) => {
@@ -132,7 +150,7 @@ const WeeklyPlanner = ({ planejamentos, color, dateCreated }) => {
                     <h3>{item.diciplina}</h3>
                     <ul className="topics-list">
                       {item.topics.map((topic, idx) => (
-                        <li key={idx}>{topic}</li>
+                        <li key={idx} onClick={() => getQuestionTopic(topic, item.diciplina)} style={{ cursor: 'pointer'  }}>{topic}</li>
                       ))}
                     </ul>
                   </div>

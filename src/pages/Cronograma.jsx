@@ -127,7 +127,7 @@ export default function Cronograma() {
 
                 <article className="cronograma-container">
 
-                     <WeeklyPlanner planejamentos={data.planejamentos} dateCreated={data.dateCreated} color={data.colorCode}/>
+                     <WeeklyPlanner planejamentos={data.planejamentos} dateCreated={data.dateCreated} color={data.colorCode} banca={data.banca}/>
 
                 </article>
 
