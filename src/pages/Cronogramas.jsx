@@ -67,7 +67,7 @@ const Cronogramas = () => {
 
     e.preventDefault();
 
-    if((file === null && url === "") || title === "" || cargoArea === "" || horasDiarias === 0 || colorSelected === "" || emojCode === "") {
+    if((file === null && url === "") || cargoArea === "" || horasDiarias === 0) {
       setMessageFormIncomplete(true)
       return
     }
@@ -312,16 +312,10 @@ const Cronogramas = () => {
               </div>
 
               {/* URL do Edital */}
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label className="form-label">URL do Edital</label>
                 <input className="form-input" onChange={(e) => setUrl(e.target.value)} value={url} type="url" placeholder="https://exemplo.com/edital.pdf" />
-              </div>
-
-              {/* Nome do Cronograma */}
-              <div className="form-group">
-                <label className="form-label">Nome do Cronograma</label>
-                <input className="form-input" type="text" placeholder="Ex: Concurso INSS 2026" onChange={(e) => setTitle(e.target.value)} value={title} />
-              </div>
+              </div> */}
 
               {/* Cargo */}
               <div className="form-group">
@@ -333,44 +327,6 @@ const Cronogramas = () => {
               <div className="form-group">
                 <label className="form-label">Horas disponíveis para estudar (por dia)</label>
                 <input className="form-input" type="number" placeholder="Ex: 4" min="1" max="16" onChange={(e) => setHorasDiarias(e.target.value)} value={horasDiarias} />
-              </div>
-
-              {/* Color Picker */}
-              <div className="form-group">
-                <label className="form-label">Cor do Cronograma</label>
-                <div className="color-picker-grid">
-                  {COLORS.map((color) => (
-                    <button
-                      key={color}
-                      className={`color-option ${colorSelected === color ? "selected" : ""}`}
-                      style={{ background: color }}
-                      onClick={() => setColorSelected(color)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Emoji Picker */}
-              <div className="form-group">
-                <label className="form-label">Emoji</label>
-                <div className="emoji-picker-container">
-                  <button className="emoji-trigger" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-                    <span className="emoji-trigger-icon">{emojCode}</span>
-                    <span className="emoji-trigger-text">Clique para escolher um emoji</span>
-                  </button>
-                  {showEmojiPicker && (
-                    <div className="emoji-dropdown">
-                      <EmojiPicker
-                        onEmojiClick={(emojiData) => {
-                          setEmojiCode(emojiData.emoji);
-                          setShowEmojiPicker(false);
-                        }}
-                        width={320}
-                        height={380}
-                      />
-                    </div>
-                  )}
-                </div>
               </div>
 
               {/* Submit */}

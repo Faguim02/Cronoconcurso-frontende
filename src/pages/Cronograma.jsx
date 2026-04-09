@@ -63,7 +63,7 @@ export default function Cronograma() {
                     <div className="icon"><FiTarget/></div>                    
                 </span>
                 <h1>{data.concurso}</h1>
-                <span className="subtitle">{data.cargo}</span>
+                <span className="subtitle">{data.cargo} - {data?.banca}</span>
 
                 <section className="disciplinas">
                     {/* no maximo 4 */}
