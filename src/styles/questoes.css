@@ -90,7 +90,7 @@
 .q-config-section {
   display: flex;
   justify-content: center;
-  padding: 2rem 1rem;
+  align-items: center;
 }
 
 .q-config-card {
@@ -207,6 +207,30 @@
   color: #333;
   cursor: pointer;
   transition: background 0.15s;
+}
+
+.q-diff-btns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.q-diff-btn {
+  padding: 0.6rem 0.4rem;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  background: #fafafa;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #777;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.selected {
+  border-color: var(--duo-green);
+  background: var(--duo-green-light);
+  color: var(--duo-green-dark);
 }
 
 .q-btn-start {

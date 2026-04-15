@@ -90,6 +90,7 @@ const Questoes = () => {
   const [showBancaDropdown, setShowBancaDropdown] = useState(false);
   const [showDisciplinaDropdown, setShowDisciplinaDropdown] = useState(false);
   const [showAssuntoDropdown, setShowAssuntoDropdown] = useState(false);
+  const [sending, setSending] = useState(false);
 
   // ── App / user state ──
   const [usuario, setUsuario] = useState();
@@ -269,10 +270,6 @@ const Questoes = () => {
   const renderConfig = () => (
     <div className="q-config-section">
       <div className="q-config-card">
-        <div className="q-config-header">
-          <h2 className="q-config-title">Configurar Questionário</h2>
-          <p className="q-config-subtitle">Selecione os parâmetros para gerar suas questões de estudo</p>
-        </div>
 
         <div className="q-form">
 
@@ -334,15 +331,37 @@ const Questoes = () => {
 
           <div className="q-form-group">
             <label className="q-label">Dificuldade</label>
-            <select className="q-select" value={dificuldade} onChange={e => setDificuldade(e.target.value)}>
-              <option value="">Selecione...</option>
-              {DIFICULDADES.map(d => <option key={d} value={d}>{d}</option>)}
-            </select>
+            <div className="q-diff-btns">
+              {DIFICULDADES.map(d => (
+                <button key={d} className={`q-diff-btn ${dificuldade === d ? "selected" : ""}`}
+                  onClick={() => setDificuldade(d)}>{d}</button>
+              ))}
+            </div>
           </div>
 
           <button className="q-btn-start" onClick={handleStart} disabled={!banca || !disciplina || !dificuldade || loading}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            {loading ? "⏳ Gerando questões..." : "Iniciar Questionário"}
+            {loading ? (
+              <div style={{
+                width: '20px',
+                height: '20px',
+                border: '4px solid #f3f3f3',
+                borderTop: '4px solid #3498db',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }}>
+                <style>{`
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+                `}</style>
+              </div>
+            ): (
+              <>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Iniciar Questionário
+              </>
+            ) }
           </button>
         </div>
       </div>
@@ -365,10 +384,10 @@ const Questoes = () => {
               <span className="duo-stat-value">{totalCorrect}/{questoes.length}</span>
               <span className="duo-stat-label">Acertos</span>
             </div>
-            <div className="duo-stat">
+            {/* <div className="duo-stat">
               <span className="duo-stat-value duo-xp-color">+{xp}</span>
               <span className="duo-stat-label">XP ganho</span>
-            </div>
+            </div> */}
             <div className="duo-stat">
               <span className="duo-stat-value">{pct}%</span>
               <span className="duo-stat-label">Precisão</span>
@@ -393,7 +412,23 @@ const Questoes = () => {
           </div>
 
           <div className="duo-result-actions">
-            <button className="duo-btn-retry" onClick={handleStart}>TENTAR NOVAMENTE</button>
+            <button className="duo-btn-retry" onClick={handleStart}>{loading ? (
+              <div style={{
+                width: '20px',
+                height: '20px',
+                border: '4px solid #f3f3f3',
+                borderTop: '4px solid #3498db',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }}>
+                <style>{`
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+                `}</style>
+              </div>
+            ) : "Tentar Novamente"}</button>
             <button className="duo-btn-quit" onClick={handleQuit}>VOLTAR AO MENU</button>
           </div>
         </div>
@@ -415,19 +450,19 @@ const Questoes = () => {
           <div className="duo-progress-track">
             <div className="duo-progress-fill" style={{ width: `${progress}%` }} />
           </div>
-          <div className="duo-hearts">
+          {/* <div className="duo-hearts">
             {Array.from({ length: 5 }).map((_, i) => (
               <span key={i} className={`duo-heart ${i < hearts ? "alive" : "dead"}`}>
                 {i < hearts ? "❤️" : "🩶"}
               </span>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Stats row */}
         <div className="duo-stats-row">
-          <div className="duo-chip duo-xp-chip">⚡ {xp} XP</div>
-          {streak > 0 && <div className="duo-chip duo-streak-chip">🔥 {streak} dias</div>}
+          {/* <div className="duo-chip duo-xp-chip">⚡ {xp} XP</div>
+          {streak > 0 && <div className="duo-chip duo-streak-chip">🔥 {streak} dias</div>} */}
           <div className="duo-chip duo-q-chip">Questão {currentIndex + 1}/{questoes.length}</div>
         </div>
 
