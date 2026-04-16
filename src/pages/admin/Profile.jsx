@@ -63,6 +63,8 @@ const Profile = () => {
     queryKey: ["plans"],
     queryFn: async () => {
       const plans = await paymentService.findAllPlans();
+      const users = await userService.findAllUsers();
+      setUsers(users);
       setPlans(plans);
       return plans;
     },
@@ -79,7 +81,7 @@ const Profile = () => {
       if (localStorage.getItem('user') === null) {
         const user = await userService.AboutUser();
         localStorage.setItem('user', JSON.stringify(user));
-        setUsuario(user);
+        setCurrentUser(user.user);
       } else {
         const user = JSON.parse(localStorage.getItem('user'));
         setCurrentUser(user.user);
@@ -104,7 +106,7 @@ const Profile = () => {
   const openPlanModal = (plan) => {
     if (plan) {
       setEditingPlan(plan); setPlanName(plan.name); setPlanPrice(plan.price.toString());
-      setPlanDescription(plan.description); setPlanDuration(plan.duration.toString()); setPlanActive(plan.active);
+      setPlanDescription(plan.description);
     } else {
       setEditingPlan(null); setPlanName(""); setPlanPrice(""); setPlanDescription(""); setPlanDuration("1"); setPlanActive(true);
     }
@@ -112,11 +114,25 @@ const Profile = () => {
   };
 
   const handleSavePlan = async() => {
-    if (!planName.trim() || !planPrice || !planDescription.trim()) { showToast("Erro", "Preencha todos os campos do plano.", "destructive"); return; }
+    alert("a")
     if (editingPlan) {
-      setPlans((prev) => prev.map((p) => p.id === editingPlan.id ? { ...p, name: planName, price: parseFloat(planPrice), description: planDescription, duration: parseInt(planDuration), active: planActive } : p));
+      alert("b")
+      const result = await paymentService.updatePlan(editingPlan.id, {
+        name: planName,
+        price: parseFloat(planPrice),
+        description: planDescription,
+        codigo: planName.toLowerCase(),
+        duration: parseInt(planDuration),
+        active: planActive,
+        cronogramAccess,
+        cronogramAmount,
+        questionAmount,
+      });
+      if (result?.error) { showToast("Erro", "Não foi possível atualizar o plano.", "destructive"); return; }
+      refetch();
       showToast("Sucesso ✅", "Plano atualizado!");
     } else {
+      if (!planName.trim() || !planPrice || !planDescription.trim()) { showToast("Erro", "Preencha todos os campos do plano.", "destructive"); return; }
       await paymentService.createPlan({ name: planName, price: parseFloat(planPrice), description: planDescription, codigo: planName.toLowerCase(), cronogramAccess, cronogramAmount, questionAmount });
       // setPlans((prev) => [...prev, { id: Date.now().toString(), name: planName, price: parseFloat(planPrice), description: planDescription, duration: parseInt(planDuration), active: planActive }]);
       refetch()
@@ -125,7 +141,12 @@ const Profile = () => {
     setPlanModalOpen(false);
   };
 
-  const handleDeletePlan = (id) => { setPlans((prev) => prev.filter((p) => p.id !== id)); showToast("Plano removido", "O plano foi excluído com sucesso."); };
+  const handleDeletePlan = async (id) => {
+    const result = await paymentService.removePlan(id);
+    if (result?.error) { showToast("Erro", "Não foi possível excluir o plano.", "destructive"); return; }
+    refetch();
+    showToast("Plano removido", "O plano foi excluído com sucesso.");
+  };
   const handleToggleAdmin = (id) => { setUsers((prev) => prev.map((u) => (u.id === id ? { ...u, isAdmin: !u.isAdmin } : u))); showToast("Permissão atualizada", "O papel do usuário foi alterado."); };
   const handleDeleteUser = (id) => { setUsers((prev) => prev.filter((u) => u.id !== id)); showToast("Usuário removido", "O usuário foi excluído."); };
 
