@@ -74,4 +74,17 @@ export class UsuarioService {
             }
         }
     }
+
+    async findAllUsers() {
+        try {
+            useJwtToken()
+            const response = await api.get('pay/clients')
+            return response.data
+        } catch (error) {
+            return {
+                message: 'Error fetching users',
+                error: error.message
+            }
+        }
+    }
 }

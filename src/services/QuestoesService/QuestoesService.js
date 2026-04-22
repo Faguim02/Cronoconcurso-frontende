@@ -20,4 +20,19 @@ export class QuestoesService {
             }
         }
     }
+
+    async getLastQuestionSession() {
+        useJwtToken()
+        return await api.get('/questoes/sessao');
+    }
+
+    async finishUserQuestionSession(data) {
+        useJwtToken()
+        return await api.post('/finish-session', data);
+    }
+
+    async findDashboardQuestions() {
+        useJwtToken()
+        return await api.get('/questoes/dashboard');
+    }
 }

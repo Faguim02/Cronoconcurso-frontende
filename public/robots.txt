@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /cronograma/
+Disallow: /cronogramas/
+Disallow: /usuario/
+Disallow: /dashboard/
+Disallow: /questoes/
+
+Sitemap: https://cronoconcurso.com.br/sitemap.xml

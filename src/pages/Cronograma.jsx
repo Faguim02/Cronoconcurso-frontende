@@ -54,23 +54,6 @@ export default function Cronograma() {
         await cronogramaService.checkTopic(id)
         refetch()
     }
-    function diasDesde(dataString) {
-        // Data fornecida
-        const dataPassada = new Date(dataString);
-        
-        // Data de hoje
-        const hoje = new Date();
-        
-        // Zerar horas, minutos, segundos e milissegundos
-        dataPassada.setUTCHours(0, 0, 0, 0);
-        hoje.setUTCHours(0, 0, 0, 0);
-        
-        // Calcular diferença em milissegundos e converter para dias
-        const diferencaMs = hoje - dataPassada;
-        const dias = Math.floor(diferencaMs / (1000 * 60 * 60 * 24));
-        
-        return dias;
-    }
 
     return (
         <div className="cronograma">
@@ -80,7 +63,7 @@ export default function Cronograma() {
                     <div className="icon"><FiTarget/></div>                    
                 </span>
                 <h1>{data.concurso}</h1>
-                <span className="subtitle">{data.cargo}</span>
+                <span className="subtitle">{data.cargo} - {data?.banca}</span>
 
                 <section className="disciplinas">
                     {/* no maximo 4 */}
@@ -144,7 +127,7 @@ export default function Cronograma() {
 
                 <article className="cronograma-container">
 
-                     <WeeklyPlanner planejamentos={data.planejamentos} days={() => diasDesde(data.dateCreated)} color={data.colorCode}/>
+                     <WeeklyPlanner planejamentos={data.planejamentos} dateCreated={data.dateCreated} color={data.colorCode} banca={data.banca}/>
 
                 </article>
 

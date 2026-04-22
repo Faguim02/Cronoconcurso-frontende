@@ -17,6 +17,36 @@ export class PaymentService {
         }
     }
 
+    async updatePlan(id, data) {
+        try {
+            
+            useJwtToken()
+            const response = await api.put(`pay/plan/${id}`, data)
+            return response.data
+
+        } catch (error) {
+            return {
+                message: 'Error updating plan',
+                error: error.message
+            }
+        }
+    }
+
+    async removePlan(id) {
+        try {
+            
+            useJwtToken()
+            const response = await api.delete(`pay/plan/${id}`)
+            return response.data
+
+        } catch (error) {
+            return {
+                message: 'Error removing plan',
+                error: error.message
+            }
+        }
+    }
+
     async findPlanAndFatures() {
         try {
             

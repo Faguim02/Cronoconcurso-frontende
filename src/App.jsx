@@ -10,6 +10,8 @@ import PagamentoSucesso from './pages/SucessPaymento'
 import PagamentoCancelado from './pages/CancelPayment'
 import NotFound from './pages/NotFound'
 import Questoes from './pages/Questoes'
+import Dashboard from './pages/Dashboard'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
 
@@ -17,6 +19,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/selecionar-concurso" element={<SelectConcurso />} />
@@ -24,6 +27,7 @@ function App() {
         <Route path='/usuario/planos' element={<Plans/>}/>
         <Route path='/usuario' element={<Profile/>}/>
         <Route path='questoes' element={<Questoes/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/payment/sucess' element={<PagamentoSucesso/>}/>
         <Route path='/payment/cancel' element={<PagamentoCancelado/>}/>
         <Route path="*" element={<NotFound />} />

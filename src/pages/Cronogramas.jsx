@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import EmojiPicker from "emoji-picker-react";
-import "../styles/dashboard.css";
+import "../styles/cronogramas.css";
 import { useQuery } from "@tanstack/react-query";
 import { CronogramaService } from '../services/CronogramaService/CronogramService'
 import { useNavigate } from 'react-router-dom'
@@ -67,7 +67,7 @@ const Cronogramas = () => {
 
     e.preventDefault();
 
-    if((file === null && url === "") || title === "" || cargoArea === "" || horasDiarias === 0 || colorSelected === "" || emojCode === "") {
+    if((file === null && url === "") || cargoArea === "" || horasDiarias === 0) {
       setMessageFormIncomplete(true)
       return
     }
@@ -116,7 +116,7 @@ const Cronogramas = () => {
           <button className="sidebar-close" onClick={() => setSidebarOpen(false)}>✕</button>
         </div>
         <nav className="sidebar-nav">
-          <button className="sidebar-link">
+          <button className="sidebar-link active">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             Meus Cronogramas
           </button>
@@ -124,10 +124,14 @@ const Cronogramas = () => {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
             Questionários
           </button>
-          <button className="sidebar-link">
+          <button className="sidebar-link" onClick={() => { setSidebarOpen(false); navigate("/dashboard") }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+            Dashboard
+          </button>
+          {/* <button className="sidebar-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
             Configurações
-          </button>
+          </button> */}
         </nav>
         <div className="sidebar-footer">
           <p className="sidebar-footer-text">Cronoconcurso v1.0 © 2026</p>
@@ -145,10 +149,10 @@ const Cronogramas = () => {
             <h1 className="header-title" style={{margin: 0}}>📅 Cronogramas</h1>
           </div>
           <div className="header-right">
-            <button className="notification-btn">
+            {/* <button className="notification-btn">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
               <span className="notification-badge" />
-            </button>
+            </button> */}
             <UserMenuComponent name={usuario && String(usuario.user.name)}>
               <div className="user-menu">
                 <div className="user-avatar">{usuario && String(usuario.user.name).slice(0, 1)}</div>
@@ -264,22 +268,6 @@ const Cronogramas = () => {
       </div>
 
       {/* Modal */}
-      {modalOpen && !usuario.plan && (
-        <div className="modal-overlay" onClick={() => { setModalOpen(false); setShowEmojiPicker(false); }}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2 className="modal-title">Plano de Estudo</h2>
-              <button className="modal-close" onClick={() => { setModalOpen(false); setShowEmojiPicker(false); }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>Para criar um cronograma, você precisa ter um plano de estudo ativo.</p>
-              <button className="button" onClick={() => { setModalOpen(false); setShowEmojiPicker(false); navigate("/usuario/planos") }}>Ir para planos"</button>
-            </div>
-          </div>
-        </div>
-      )}
       {modalOpen && usuario.plan && (
         <div className="modal-overlay" onClick={() => { setModalOpen(false); setShowEmojiPicker(false); }}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -308,16 +296,10 @@ const Cronogramas = () => {
               </div>
 
               {/* URL do Edital */}
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label className="form-label">URL do Edital</label>
                 <input className="form-input" onChange={(e) => setUrl(e.target.value)} value={url} type="url" placeholder="https://exemplo.com/edital.pdf" />
-              </div>
-
-              {/* Nome do Cronograma */}
-              <div className="form-group">
-                <label className="form-label">Nome do Cronograma</label>
-                <input className="form-input" type="text" placeholder="Ex: Concurso INSS 2026" onChange={(e) => setTitle(e.target.value)} value={title} />
-              </div>
+              </div> */}
 
               {/* Cargo */}
               <div className="form-group">
@@ -329,44 +311,6 @@ const Cronogramas = () => {
               <div className="form-group">
                 <label className="form-label">Horas disponíveis para estudar (por dia)</label>
                 <input className="form-input" type="number" placeholder="Ex: 4" min="1" max="16" onChange={(e) => setHorasDiarias(e.target.value)} value={horasDiarias} />
-              </div>
-
-              {/* Color Picker */}
-              <div className="form-group">
-                <label className="form-label">Cor do Cronograma</label>
-                <div className="color-picker-grid">
-                  {COLORS.map((color) => (
-                    <button
-                      key={color}
-                      className={`color-option ${colorSelected === color ? "selected" : ""}`}
-                      style={{ background: color }}
-                      onClick={() => setColorSelected(color)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Emoji Picker */}
-              <div className="form-group">
-                <label className="form-label">Emoji</label>
-                <div className="emoji-picker-container">
-                  <button className="emoji-trigger" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-                    <span className="emoji-trigger-icon">{emojCode}</span>
-                    <span className="emoji-trigger-text">Clique para escolher um emoji</span>
-                  </button>
-                  {showEmojiPicker && (
-                    <div className="emoji-dropdown">
-                      <EmojiPicker
-                        onEmojiClick={(emojiData) => {
-                          setEmojiCode(emojiData.emoji);
-                          setShowEmojiPicker(false);
-                        }}
-                        width={320}
-                        height={380}
-                      />
-                    </div>
-                  )}
-                </div>
               </div>
 
               {/* Submit */}
@@ -388,7 +332,7 @@ const Cronogramas = () => {
                     `}</style>
                   </div>
                 ) : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>}
-                {cronogramSending ? <>pode demorar até 5 minutos</>: <>Gerara Cronograma</>}
+                {cronogramSending ? <>pode demorar até 5 minutos</>: <>Gerar Cronograma</>}
               </button>
 
               {messageFormIncomplete && (
